@@ -19,7 +19,7 @@ export default () => {
   return (
     <Menu theme='dark' mode='vertical' defaultSelectedKeys={[path]}>
       <Menu.Item key={'dashboard'} icon={<HomeOutlined />}>
-        <Link to={'/dashboard'}>Courses</Link>
+        <Link to={'/dashboard'}>Department</Link>
       </Menu.Item>
       {!collapsed && <FpsView width={190} height={100} top={525} />}
     </Menu>

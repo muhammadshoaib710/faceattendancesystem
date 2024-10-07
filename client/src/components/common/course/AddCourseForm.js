@@ -36,43 +36,43 @@ export default ({ refetchTableTotal, refetchTable }) => {
 
   return (
     <Content>
-      <Card title="Add Course Form" className="addCourse__card">
+      <Card title="Add department Form" className="addCourse__card">
         <br />
         <Form className="addCourse__form" name="basic" onFinish={onSubmit}>
           <Form.Item
-            label="Course Code"
+            label="Department Code"
             name="courseCode"
-            rules={[{ required: true, message: "Please input course code!" }]}
+            rules={[{ required: true, message: "Please input department code!" }]}
           >
             <Input
               name="courseCode"
-              placeholder="Enter course code"
+              placeholder="Enter department code"
               onChange={onChange}
             />
           </Form.Item>
 
           <Form.Item
-            label="Course Name"
+            label="Department Name"
             name="courseName"
-            rules={[{ required: true, message: "Please input course name!" }]}
+            rules={[{ required: true, message: "Please input department name!" }]}
           >
             <Input
               name="courseName"
-              placeholder="Enter course name"
+              placeholder="Enter department name"
               onChange={onChange}
             />
           </Form.Item>
 
           <Form.Item
-            label="Course Session"
+            label="Department Session"
             name="courseSession"
             rules={[
-              { required: true, message: "Please input course session!" },
+              { required: true, message: "Please input department session!" },
             ]}
           >
             <Input
               name="courseSession"
-              placeholder="Enter course session"
+              placeholder="Enter department session"
               onChange={onChange}
             />
           </Form.Item>

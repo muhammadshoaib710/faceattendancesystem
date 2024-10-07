@@ -21,7 +21,7 @@ export default () => {
   return (
     <Menu theme='dark' mode='vertical' defaultSelectedKeys={[path]}>
       <Menu.Item key={'dashboard'} icon={<HomeOutlined />}>
-        <Link to={'/dashboard'}>Courses</Link>
+        <Link to={'/dashboard'}>Department</Link>
       </Menu.Item>
       <Menu.Item key={'facegallery'} icon={<PictureOutlined />}>
         <Link to={'/facegallery'}>Face Gallery</Link>

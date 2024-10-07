@@ -29,7 +29,7 @@ export default ({ isCollapseMenuOpen, setIsCollapseMenuOpen }) => {
       <p>
         <Link to={'/dashboard'}>
           <HomeOutlined />
-          &nbsp; Courses
+          &nbsp; Department
         </Link>
       </p>
     </Drawer>
