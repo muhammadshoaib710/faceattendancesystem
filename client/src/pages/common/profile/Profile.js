@@ -100,7 +100,7 @@ export default () => {
                   <Input
                     name='role'
                     defaultValue={`${
-                      user.userLevel === 0 ? 'Employee' : 'HR'
+                      user.userLevel === 0 ? 'Student' : 'Lecturer'
                     }`}
                     disabled
                   />
