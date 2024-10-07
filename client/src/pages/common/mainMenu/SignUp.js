@@ -216,7 +216,7 @@ export default (props) => {
                 onChange={onChange}
               >
                 <Radio value={0}>shoaib Employee</Radio>
-                <Radio value={1}>HR</Radio>
+                <Radio value={1}>hamid HR</Radio>
               </Radio.Group>
             </Form.Item>
             <Divider />
