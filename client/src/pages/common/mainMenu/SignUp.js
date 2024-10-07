@@ -215,8 +215,8 @@ export default (props) => {
                 value={values.userLevel}
                 onChange={onChange}
               >
-                <Radio value={0}>Student</Radio>
-                <Radio value={1}>Lecturer</Radio>
+                <Radio value={0}>shoaib Employee</Radio>
+                <Radio value={1}>HR</Radio>
               </Radio.Group>
             </Form.Item>
             <Divider />
