@@ -5,13 +5,15 @@ module.exports = gql`
     _id: ID!
     attendanceID: String!
     studentID: String!
+    checkInTime: String
+    checkOutTime: String
     createdAt: String!
     updatedAt: String!
   }
 
-  input trxInput{
-      attendanceID: ID!
-      studentID: ID!
+  input trxInput {
+    attendanceID: ID!
+    studentID: ID!
   }
 
   extend type Query {
@@ -21,5 +23,6 @@ module.exports = gql`
 
   extend type Mutation {
     createTrx(trxInput: trxInput!): String!
+    checkOutTrx(trxInput: trxInput!): String!
   }
 `;

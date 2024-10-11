@@ -99,7 +99,7 @@ export default (props) => {
                 )}
                 {courseGQLQuery.loading && (
                   <>
-                    Fetching Course Detail... <LoadingOutlined />
+                    Fetching Department Detail... <LoadingOutlined />
                   </>
                 )}
               </Form.Item>

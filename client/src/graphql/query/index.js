@@ -25,6 +25,8 @@ import {
 
 import { FETCH_TRX_LIST_IN_ATTENDANCE } from "./trx/trxListInAttendanceQuery";
 
+import { FETCH_TRX_LIST } from "./trx/trxListQuery";
+
 export { FETCH_COURSE_QUERY, FETCH_PARTICIPANTS_QUERY };
 export { FETCH_COURSES_COUNT_QUERY, FETCH_COURSES_QUERY };
 export { FETCH_UNCHECKED_NOTIFICATIONS_QUERY, FETCH_NOTIFICATIONS_QUERY };
@@ -41,3 +43,5 @@ export {
 };
 
 export { FETCH_TRX_LIST_IN_ATTENDANCE };
+
+export { FETCH_TRX_LIST };

@@ -30,7 +30,7 @@ export default () => {
                 : 'lecturerSiderNavbar__text__hidden'
             }
           >
-            <span className='lecturerSiderNavbar__text__item'>Lecturer</span>
+            <span className='lecturerSiderNavbar__text__item'>Admin</span>
             <span className='lecturerSiderNavbar__text__item'>Version</span>
           </div>
         </div>

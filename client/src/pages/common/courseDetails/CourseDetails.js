@@ -11,6 +11,7 @@ import {
   Table,
 } from "antd";
 import React, { useContext, useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
 import Modal from "../../../components/common/customModal";
 import {
   Footer,
@@ -30,6 +31,7 @@ import "./CourseDetails.css";
 const { Content } = Layout;
 
 export default (props) => {
+  const history = useHistory();
   const columns = [
     {
       title: <strong>Avatar</strong>,
@@ -82,6 +84,11 @@ export default (props) => {
             }
           >
             Kick
+          </Button>
+          <Button
+            onClick={() => history.push(`/employee/${index.key}`)}
+          >
+            Details
           </Button>
         </Space>
       ),
