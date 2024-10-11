@@ -28,9 +28,7 @@ import {
   TermCondition,
   UserGuidelines,
 } from "./pages/common";
-import {
-  AttendanceForm,
-} from "./pages/lecturerPage";
+import { AttendanceForm } from "./pages/lecturerPage";
 import { FaceGallery } from "./pages/studentPage";
 import {
   AuthRoute,
@@ -131,6 +129,7 @@ function App() {
                           path="/userguidelines"
                           component={UserGuidelines}
                         />
+
                         <AuthRoute component={NoFound} />
                       </Switch>
                     </Router>
