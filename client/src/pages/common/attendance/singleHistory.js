@@ -12,6 +12,7 @@ import {
   Typography,
 } from "antd";
 import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import {
   Footer,
   Greeting,
@@ -32,6 +33,8 @@ const { Title } = Typography;
 const { Content } = Layout;
 
 export default (props) => {
+  const history = useHistory();
+
   const columns = [
     {
       title: <strong>Avatar</strong>,
@@ -39,6 +42,20 @@ export default (props) => {
       key: "avatar",
       align: "center",
       width: "5%",
+      render: (_, record) => (
+        <Avatar
+          src={record.profilePictureURL}
+          style={{
+            backgroundColor: `rgb(${Math.random() * 150 + 30}, ${
+              Math.random() * 150 + 30
+            }, ${Math.random() * 150 + 30})`,
+            cursor: 'pointer'
+          }}
+          onClick={() => history.push(`/employee/${record.key}`)}
+        >
+          {record.name[0]}
+        </Avatar>
+      ),
     },
     {
       key: "cardID",
@@ -137,26 +154,27 @@ export default (props) => {
 
   useEffect(() => {
     if (trxListInAttendanceGQLQuery.data) {
+      console.log("trxListInAttendanceGQLQuery:", trxListInAttendanceGQLQuery);
       const currAbsentees = participants.filter((participant) => {
         delete participant.attend_at;
 
-        const result = trxListInAttendanceGQLQuery.data.getTrxListInAttendance.filter(
+        const result = trxListInAttendanceGQLQuery?.data?.getTrxListInAttendance?.filter(
           (attendee) => participant._id == attendee.studentID
         );
 
-        return result.length == 0; //count as absentee if no found
+        return result?.length == 0; //count as absentee if no found
       });
 
 
       const currAttendees = participants.filter((participant) => {
-        const result = trxListInAttendanceGQLQuery.data.getTrxListInAttendance.filter(
+        const result = trxListInAttendanceGQLQuery?.data?.getTrxListInAttendance?.filter(
           (attendee) => participant._id == attendee.studentID
         );
           console.log("result", result);
-        if (result.length >= 1) {
+        if (result?.length >= 1) {
           Object.assign(participant, { attend_at: result[0].createdAt });
         }
-        return result.length >= 1; //count as attendee if found
+        return result?.length >= 1; //count as attendee if found
       });
 
       setAbsentees(currAbsentees);
@@ -182,22 +200,9 @@ export default (props) => {
     participants.map((participant, index) => {
       const tmp = {
         key: participant._id,
-        avatar: (
-          <Avatar
-            src={participant.profilePictureURL}
-            style={{
-              backgroundColor: `rgb(${Math.random() * 150 + 30}, ${
-                Math.random() * 150 + 30
-              }, ${Math.random() * 150 + 30})`,
-            }}
-          >
-            {/* Set the avatar to participant's first name */}
-            {participant.firstName[0]}
-          </Avatar>
-        ),
+        profilePictureURL: participant.profilePictureURL,
         cardID: participant.cardID,
         name: participant.firstName + " " + participant.lastName,
-
         status: absentees.find((abs) => abs._id == participant._id)
           ? "Absent"
           : "Attend",

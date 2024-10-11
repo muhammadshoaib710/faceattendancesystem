@@ -9,7 +9,14 @@ const trxSchema = new Schema(
     student: {
       type: Schema.Types.ObjectId,
       required: true,
-    }
+    },
+    checkInTime: {
+      type: Date,
+      required: true,
+    },
+    checkOutTime: {
+      type: Date,
+    },
   },
   { timestamps: true }
 );
