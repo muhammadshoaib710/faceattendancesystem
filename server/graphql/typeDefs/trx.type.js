@@ -23,6 +23,10 @@ module.exports = gql`
 
   extend type Mutation {
     createTrx(trxInput: trxInput!): String!
+<<<<<<< Updated upstream
     checkOutTrx(trxInput: trxInput!): String!
+=======
+    createCheckout(trxInput: trxInput!): String!  // Add this line
+>>>>>>> Stashed changes
   }
 `;

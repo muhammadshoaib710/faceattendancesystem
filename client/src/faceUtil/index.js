@@ -44,6 +44,10 @@ export async function getFullFaceDescription(blob, inputSize = 512) {
 }
 
 export async function createMatcher(faceProfile, maxDescriptorDistance) {
+  if (!faceProfile) {
+    throw new Error('faceProfile is undefined');
+  }
+
   // Create labeled descriptors of member from profile
   let labeledDescriptors = faceProfile.map(
     (profile) =>
@@ -74,4 +78,20 @@ export function isFeatureExtractionModelLoaded() {
 
 export function isFacialLandmarkDetectionModelLoaded() {
   return !!faceapi.nets.faceLandmark68TinyNet.params;
+}
+
+// New function to extract and store face descriptors
+export async function extractAndStoreFaceDescriptor(imagePath, storeDescriptorCallback) {
+  // Load models
+  await faceapi.nets.ssdMobilenetv1.loadFromUri('/models');
+  await faceapi.nets.faceLandmark68Net.loadFromUri('/models');
+  await faceapi.nets.faceRecognitionNet.loadFromUri('/models');
+
+  // Extract face descriptors
+  const img = await faceapi.fetchImage(imagePath);
+  const fullFaceDescription = await faceapi.detectSingleFace(img).withFaceLandmarks().withFaceDescriptor();
+  const faceDescriptor = fullFaceDescription.descriptor;
+
+  // Store faceDescriptor using the provided callback
+  storeDescriptorCallback(faceDescriptor);
 }

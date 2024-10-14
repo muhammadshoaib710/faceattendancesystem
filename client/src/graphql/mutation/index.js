@@ -1,7 +1,6 @@
 import { CREATE_ATTENDANCE_MUTATION } from './attendance/createAttendanceMutation';
 import { EDIT_ATTENDANCE_MODE_MUTATION } from './attendance/editAttendanceModeMutation';
 import { EDIT_ATTENDANCE_ON_OFF_MUTATION } from './attendance/editAttendanceOnOffMutation';
-
 import { DELETE_ATTENDANCE_MUTATION } from './attendance/deleteAttendanceMutation';
 import { ADD_COURSE_MUTATION } from './course/addCourseMutation';
 import { DELETE_COURSE_MUTATION } from './course/deleteCourseMutation';
@@ -23,9 +22,14 @@ import {
   WARN_PARTICIPANT_MUTATION
 } from './participant/participantMutation';
 import { EDIT_PROFILE_MUTATION } from './user/editProfileMutation';
-import {EDIT_CARDID_AND_ROLE_MUTATION} from "./user/editCardIDAndUserLevel";
+import { EDIT_CARDID_AND_ROLE_MUTATION } from "./user/editCardIDAndUserLevel";
 import { OBTAIN_STUDENT_WARNING_MUTATION } from './warning/obtainStudentWarningMutation';
+<<<<<<< Updated upstream
 import {CREATE_TRX_MUTATION, CHECK_OUT_TRX_MUTATION} from "./trx/createTrxMutation";
+=======
+import { CREATE_TRX_MUTATION } from "./trx/createTrxMutation";
+import { CREATE_CHECKOUT_MUTATION } from './attendance/createCheckoutMutation'; // Add this line
+>>>>>>> Stashed changes
 
 export { LOGIN_USER, LOGIN_GOOGLE_USER, REGISTER_USER };
 export { EDIT_PROFILE_MUTATION, EDIT_CARDID_AND_ROLE_MUTATION };
@@ -44,4 +48,9 @@ export {
 export { OBTAIN_STUDENT_WARNING_MUTATION };
 export { ADD_FACE_PHOTO_MUTATION, DELETE_FACE_PHOTO_MUTATION };
 export { CREATE_ATTENDANCE_MUTATION, EDIT_ATTENDANCE_MODE_MUTATION, EDIT_ATTENDANCE_ON_OFF_MUTATION, DELETE_ATTENDANCE_MUTATION };
+<<<<<<< Updated upstream
 export { CREATE_TRX_MUTATION, CHECK_OUT_TRX_MUTATION }
+=======
+export { CREATE_TRX_MUTATION };
+// Add this line
+>>>>>>> Stashed changes

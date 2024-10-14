@@ -5,6 +5,7 @@ import {
   RightCircleFilled,
   ClockCircleFilled,
   StopOutlined,
+  ExportOutlined, // Import the new icon
 } from "@ant-design/icons";
 import { useMutation, useQuery } from "@apollo/react-hooks";
 import {
@@ -138,6 +139,14 @@ export default (props) => {
             ></Button>
           </Tooltip>
 
+          <Tooltip placement="topLeft" title="Checkout Room">
+            <Button
+              onClick={() => handleAccessCheckout(record)} // Add this line
+              style={{ margin: "10px" }}
+              icon={<ExportOutlined />} // Use the new icon
+            ></Button>
+          </Tooltip>
+
           {user.userLevel == 1 && (
             <Tooltip placement="topLeft" title="Delete Record">
               <Button
@@ -259,6 +268,12 @@ export default (props) => {
   const handleAccessRoom = (attendance) => {
     props.history.push(
       `/course/${props.match.params.id}/attendanceRoom/${attendance.key}`
+    );
+  };
+
+  const handleAccessCheckout = (attendance) => { // Add this function
+    props.history.push(
+      `/course/${props.match.params.id}/checkoutRoom/${attendance.key}`
     );
   };
 
