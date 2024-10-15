@@ -22,27 +22,27 @@ export default (props) => {
   const [absentees, setAbsentees] = useState([]);
   
   useEffect(() => {
-    console.log(participants);
     if (trxGQLQuery.data) {
       const currAbsentees = participants.filter((participant) => {
-        const result = trxGQLQuery.data.getTrxListInAttendance.filter(
-          (attendee) => participant.student._id == attendee.studentID
+        const result = trxGQLQuery?.data?.getTrxListInAttendance?.filter(
+          (attendee) => participant.student._id === attendee.studentID
         );
 
-        return result.length == 0; //count as absentee if no found
+        return result?.length === 0; // count as absentee if no found
       });
 
-      console.log(currAbsentees);
-
       const currAttendees = participants.filter((participant) => {
-        const result = trxGQLQuery.data.getTrxListInAttendance.filter(
-          (attendee) => participant.student._id == attendee.studentID
+        const result = trxGQLQuery?.data?.getTrxListInAttendance?.filter(
+          (attendee) => participant.student._id === attendee.studentID
         );
 
-        if (result.length >= 1) {
-          Object.assign(participant, { attend_at: result[0].createdAt });
+        if (result?.length >= 1) {
+          Object.assign(participant, {
+            attend_at: result[0].checkInTime,
+            checkout_at: result[0].checkOutTime,
+          });
         }
-        return result.length >= 1; //count as attendee if found
+        return result?.length >= 1; // count as attendee if found
       });
 
       currAttendees.sort(

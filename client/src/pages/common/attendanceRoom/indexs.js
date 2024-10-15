@@ -1,6 +1,6 @@
 import { LoadingOutlined } from "@ant-design/icons";
 import { useMutation, useQuery } from "@apollo/react-hooks";
-import { Card, Form, Layout, message, Select, Switch, Typography, Button } from "antd";
+import { Card, Form, Layout, message, Select, Switch, Typography } from "antd";
 import React, { useContext, useEffect, useState } from "react";
 import {
   Footer,
@@ -14,8 +14,6 @@ import { attendanceMode, DEFAULT_ATTENDANCE_MODE } from "../../../globalData";
 import {
   EDIT_ATTENDANCE_MODE_MUTATION,
   EDIT_ATTENDANCE_ON_OFF_MUTATION,
-  CREATE_TRX_MUTATION,
-  CHECK_OUT_TRX_MUTATION,
 } from "../../../graphql/mutation";
 import {
   FETCH_ATTENDANCE_QUERY,
@@ -42,13 +40,13 @@ export default (props) => {
 
   const [absentees, setAbsentees] = useState([]);
   const [course, setCourse] = useState({});
-  const [isCheckedIn, setIsCheckedIn] = useState(false);
 
   const { data, loading, error } = useQuery(
     FETCH_FACE_MATCHER_IN_COURSE_QUERY,
     {
       onError(err) {
         console.log(err);
+        // props.history.push("/dashboard");
         CheckError(err);
       },
       variables: {
@@ -56,30 +54,6 @@ export default (props) => {
       },
     }
   );
-
-  const [createTrxCallback] = useMutation(CREATE_TRX_MUTATION, {
-    update(_, { data }) {
-      if (data.createTrx !== "") {
-        message.success(data.createTrx);
-        setIsCheckedIn(true);
-      }
-    },
-    onError(err) {
-      CheckError(err);
-    },
-  });
-
-  const [checkOutTrxCallback] = useMutation(CHECK_OUT_TRX_MUTATION, {
-    update(_, { data }) {
-      if (data.checkOutTrx !== "") {
-        message.success(data.checkOutTrx);
-        setIsCheckedIn(false);
-      }
-    },
-    onError(err) {
-      CheckError(err);
-    },
-  });
 
   useEffect(() => {
     if (data) {
@@ -97,7 +71,6 @@ export default (props) => {
       }
     }
   }, [data, participants]);
-
   const attendanceGQLQuery = useQuery(FETCH_ATTENDANCE_QUERY, {
     onError(err) {
       props.history.push(
@@ -106,6 +79,7 @@ export default (props) => {
       CheckError(err);
     },
     pollInterval: 2000,
+
     variables: {
       attendanceID: props.match.params.attendanceID,
     },
@@ -131,24 +105,6 @@ export default (props) => {
       }
     }
   }, [attendanceGQLQuery.data]);
-
-  const handleCheckIn = () => {
-    createTrxCallback({
-      variables: {
-        attendanceID: props.match.params.attendanceID,
-        studentID: user._id,
-      },
-    });
-  };
-
-  const handleCheckOut = () => {
-    checkOutTrxCallback({
-      variables: {
-        attendanceID: props.match.params.attendanceID,
-        studentID: user._id,
-      },
-    });
-  };
 
   useEffect(() => {
     async function matcher() {
@@ -321,16 +277,6 @@ export default (props) => {
           {!isOn && user.userLevel == 0 && (
             <Card>
               <p>The host has closed the attendance</p>
-            </Card>
-          )}
-
-          {attendanceGQLQuery.data && isOn && user.userLevel == 0 && (
-            <Card>
-              {isCheckedIn ? (
-                <Button onClick={handleCheckOut}>Check Out</Button>
-              ) : (
-                <Button onClick={handleCheckIn}>Check In</Button>
-              )}
             </Card>
           )}
 
