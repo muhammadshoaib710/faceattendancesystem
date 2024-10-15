@@ -39,6 +39,7 @@ import {
 } from "./routes";
 import Testing from "./Testing";
 import "lazysizes";
+import TrxList from "./pages/common/TrxList/TrxList";
 
 function App() {
   return (
@@ -107,6 +108,11 @@ function App() {
                           exact
                           path="/course/:courseID/attendanceList/:attendanceID"
                           component={SingleAttendanceHistory}
+                        />
+                         <AuthRoute
+                          exact
+                          path="/employee/:id"
+                          component={TrxList}
                         />
 
                         <StudentRoute
