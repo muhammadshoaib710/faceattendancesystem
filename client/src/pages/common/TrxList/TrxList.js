@@ -37,7 +37,7 @@
       },
       {
         title: 'Check-In Time',
-        dataIndex: 'checkInTime',
+        dataIndex: 'createdAt',
         key: 'checkInTime',
         render: (text) => new Date(text).toLocaleString(),
       },
