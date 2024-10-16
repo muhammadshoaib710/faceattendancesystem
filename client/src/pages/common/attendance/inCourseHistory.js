@@ -308,7 +308,7 @@ export default (props) => {
           titleList={[
             { name: "Home", link: "/dashboard" },
             {
-              name: `Course: ${props.match.params.id}`,
+              name: `Department: ${props.match.params.id}`,
               link: `/course/${props.match.params.id}`,
             },
             {
@@ -322,7 +322,7 @@ export default (props) => {
             <Space direction="vertical" className="width100">
               {data && (
                 <Title level={4}>
-                  Course:{" "}
+                  Department:{" "}
                   {`${data.getAttendanceListInCourse.course.code} ${data.getAttendanceListInCourse.course.name} (${data.getAttendanceListInCourse.course.session})`}
                 </Title>
               )}

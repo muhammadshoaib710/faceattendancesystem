@@ -23,17 +23,17 @@ export default () => {
   );
   return (
     <div>
-      <p className='alert'>🢃 Enter Course ID for new enrolment</p>
+      <p className='alert'>🢃 Enter Department ID for new enrolment</p>
 
       <Form style={{ display: 'flex' }} onFinish={() => enrolCourseCallback()}>
         <Form.Item
-          label='Course ID'
+          label='Department ID'
           name='courseID'
-          rules={[{ required: true, message: 'Please input course ID!' }]}
+          rules={[{ required: true, message: 'Please input Department ID!' }]}
         >
           <Input
             name='courseCode'
-            placeholder='Enter course ID to enrol'
+            placeholder='Enter Department ID to enrol'
             onChange={(e) => setCourseID(e.target.value)}
           />
         </Form.Item>
