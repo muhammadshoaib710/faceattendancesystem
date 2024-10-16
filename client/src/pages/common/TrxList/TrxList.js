@@ -1,14 +1,24 @@
-  import React, { useState, useEffect } from 'react';
+  import React, { useState, useEffect, useContext } from 'react';
   import { useParams } from 'react-router-dom';
-  import { Table, Typography, Spin, Alert } from 'antd';
+  import { Table, Typography, Spin, Alert, Layout } from 'antd';
+  import { AuthContext } from "../../../context";
+  import { CheckError } from "../../../utils/ErrorHandling";
+  import {
+    Footer,
+    Greeting,
+    Navbar,
+    PageTitleBreadcrumb,
+  } from "../../../components/common/sharedLayout";
 
   const { Title } = Typography;
+  const { Content } = Layout;
 
   const TrxList = () => {
     const [trxList, setTrxList] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const { id } = useParams();
+    const { user } = useContext(AuthContext);
 
     useEffect(() => {
       const fetchTrxList = async () => {
@@ -23,6 +33,7 @@
         } catch (err) {
           setError(err.message);
           setLoading(false);
+          CheckError(err);
         }
       };
 
@@ -59,18 +70,35 @@
       },
     ];
 
-    if (loading) return <Spin size="large" />;
-    if (error) return <Alert message={`Error: ${error}`} type="error" />;
+    const titleList = [
+      { name: "Home", link: "/dashboard" },
+      { name: "Transactions", link: `/trx/${id}` },
+    ];
 
     return (
-      <div>
-        <Title level={2}>Transactions for Student</Title>
-        {trxList.length === 0 ? (
-          <Alert message="No transactions found for this student." type="info" />
-        ) : (
-          <Table columns={columns} dataSource={trxList} rowKey="attendanceID" />
-        )}
-      </div>
+      <Layout className="trxList layout">
+        <Navbar />
+        <Layout>
+          <Greeting
+            firstName={user.firstName}
+            profilePicture={user.profilePicture}
+          />
+          <PageTitleBreadcrumb titleList={titleList} />
+          <Content>
+            <Title level={2}>Transactions for Student</Title>
+            {loading ? (
+              <Spin size="large" />
+            ) : error ? (
+              <Alert message={`Error: ${error}`} type="error" />
+            ) : trxList.length === 0 ? (
+              <Alert message="No transactions found for this student." type="info" />
+            ) : (
+              <Table columns={columns} dataSource={trxList} rowKey="attendanceID" />
+            )}
+          </Content>
+          <Footer />
+        </Layout>
+      </Layout>
     );
   };
 
