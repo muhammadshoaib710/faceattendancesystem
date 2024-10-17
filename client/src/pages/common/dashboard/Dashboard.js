@@ -310,7 +310,7 @@ export default (props) => {
 
           <Space direction="vertical" className="width100">
             <h1>
-              Total {user.userLevel == 0 ? "Enrolled" : "Created"} Course:
+              Total {user.userLevel == 0 ? "Enrolled" : "Created"} Department:
               {totalCoursesQuery.data?.getCoursesCount || 0}
             </h1>
             <Button

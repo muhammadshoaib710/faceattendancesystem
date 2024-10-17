@@ -16,7 +16,7 @@ export default ({ refetchTableTotal, refetchTable }) => {
 
   const [addCourseCallback, { loading }] = useMutation(ADD_COURSE_MUTATION, {
     update() {
-      message.success("Create course successfully.");
+      message.success("Create Department successfully.");
       refetchTableTotal();
       refetchTable();
     },
@@ -36,29 +36,29 @@ export default ({ refetchTableTotal, refetchTable }) => {
 
   return (
     <Content>
-      <Card title="Add department Form" className="addCourse__card">
+      <Card title="Add Department Form" className="addCourse__card">
         <br />
         <Form className="addCourse__form" name="basic" onFinish={onSubmit}>
           <Form.Item
             label="Department Code"
             name="courseCode"
-            rules={[{ required: true, message: "Please input department code!" }]}
+            rules={[{ required: true, message: "Please input Department code!" }]}
           >
             <Input
               name="courseCode"
-              placeholder="Enter department code"
+              placeholder="Enter Department code"
               onChange={onChange}
             />
           </Form.Item>
 
           <Form.Item
-            label="Department Name"
+            label="Deparment Name"
             name="courseName"
-            rules={[{ required: true, message: "Please input department name!" }]}
+            rules={[{ required: true, message: "Please input Department name!" }]}
           >
             <Input
               name="courseName"
-              placeholder="Enter department name"
+              placeholder="Enter Department name"
               onChange={onChange}
             />
           </Form.Item>
@@ -67,12 +67,12 @@ export default ({ refetchTableTotal, refetchTable }) => {
             label="Department Session"
             name="courseSession"
             rules={[
-              { required: true, message: "Please input department session!" },
+              { required: true, message: "Please input Department session!" },
             ]}
           >
             <Input
               name="courseSession"
-              placeholder="Enter department session"
+              placeholder="Enter Department session"
               onChange={onChange}
             />
           </Form.Item>

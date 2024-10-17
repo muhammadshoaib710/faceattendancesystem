@@ -29,11 +29,11 @@ export default () => {
         <Form.Item
           label='Department ID'
           name='courseID'
-          rules={[{ required: true, message: 'Please input course ID!' }]}
+          rules={[{ required: true, message: 'Please input Department ID!' }]}
         >
           <Input
             name='courseCode'
-            placeholder='Enter course ID to enrol'
+            placeholder='Enter Department ID to enrol'
             onChange={(e) => setCourseID(e.target.value)}
           />  
         </Form.Item>

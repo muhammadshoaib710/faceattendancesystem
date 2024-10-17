@@ -18,7 +18,7 @@ export default ({
         return (
           <>
             <p>
-              <strong>Course ID</strong>: {payload.shortID}
+              <strong>Department ID</strong>: {payload.shortID}
             </p>
             <p>
               <strong>Particular</strong>:{' '}
@@ -71,7 +71,7 @@ export default ({
             </p>
             <br />
             <p>
-              <strong>Course: </strong>
+              <strong>Department  : </strong>
               {payload.course}
             </p>
             <p>

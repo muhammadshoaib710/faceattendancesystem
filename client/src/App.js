@@ -109,7 +109,7 @@ function App() {
                           path="/course/:courseID/attendanceList/:attendanceID"
                           component={SingleAttendanceHistory}
                         />
-                        <AuthRoute
+                         <AuthRoute
                           exact
                           path="/employee/:id"
                           component={TrxList}

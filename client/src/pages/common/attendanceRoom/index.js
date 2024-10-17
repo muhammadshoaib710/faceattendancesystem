@@ -218,7 +218,7 @@ export default (props) => {
   const titleList = [
     { name: "Home", link: "/dashboard" },
     {
-      name: `Course: ${props.match.params.courseID}`,
+      name: `Department: ${props.match.params.courseID}`,
       link: `/course/${props.match.params.courseID}`,
     },
     {
@@ -250,7 +250,7 @@ export default (props) => {
           >
             {data && (
               <Title level={4}>
-                Course:{" "}
+                Department:{" "}
                 {course.code + "-" + course.name + "(" + course.session + ")"}
               </Title>
             )}
