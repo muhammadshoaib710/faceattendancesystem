@@ -43,6 +43,7 @@ export default (props) => {
   const [absentees, setAbsentees] = useState([]);
   const [course, setCourse] = useState({});
   const [isCheckedIn, setIsCheckedIn] = useState(false);
+  const [isFaceRecognized, setIsFaceRecognized] = useState(false);
 
   const { data, loading, error } = useQuery(
     FETCH_FACE_MATCHER_IN_COURSE_QUERY,
@@ -133,12 +134,16 @@ export default (props) => {
   }, [attendanceGQLQuery.data]);
 
   const handleCheckIn = () => {
-    createTrxCallback({
-      variables: {
-        attendanceID: props.match.params.attendanceID,
-        studentID: user._id,
-      },
-    });
+    if (isFaceRecognized) {
+      createTrxCallback({
+        variables: {
+          attendanceID: props.match.params.attendanceID,
+          studentID: user._id,
+        },
+      });
+    } else {
+      message.error("Face not recognized. Please try again.");
+    }
   };
 
   const handleCheckOut = () => {
@@ -302,6 +307,7 @@ export default (props) => {
                 faceMatcher={faceMatcher}
                 facePhotos={facePhotos}
                 participants={participants}
+                setIsFaceRecognized={setIsFaceRecognized}
               />
             )}
           {/* For Remote, use Student PC For FR */}
@@ -315,6 +321,7 @@ export default (props) => {
                 faceMatcher={faceMatcher}
                 facePhotos={facePhotos}
                 participants={participants}
+                setIsFaceRecognized={setIsFaceRecognized}
               />
             )}
 
@@ -329,7 +336,9 @@ export default (props) => {
               {isCheckedIn ? (
                 <Button onClick={handleCheckOut}>Check Out</Button>
               ) : (
-                <Button onClick={handleCheckIn}>Check In</Button>
+                <Button onClick={handleCheckIn} disabled={!isFaceRecognized}>
+                  Check In
+                </Button>
               )}
             </Card>
           )}

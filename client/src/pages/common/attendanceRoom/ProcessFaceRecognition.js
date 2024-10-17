@@ -26,7 +26,7 @@ const { Content } = Layout;
 const { Option } = Select;
 
 export default (props) => {
-  const { participants, faceMatcher, facePhotos } = props;
+  const { participants, faceMatcher, facePhotos, setIsFaceRecognized } = props;
 
   const { threshold } = useContext(FaceThresholdDistanceContext);
 
@@ -44,24 +44,6 @@ export default (props) => {
   const [loadingMessageError, setLoadingMessageError] = useState("");
   const [fullDesc, setFullDesc] = useState(null);
   const [waitText, setWaitText] = useState("");
-
-  const [createTrxCallback] = useMutation(CREATE_TRX_MUTATION, {
-    update(_, { data }) {
-      if (data.createTrx !== "") message.success(data.createTrx);
-    },
-    onError(err) {
-      CheckError(err);
-    },
-  });
-
-  const [checkOutTrxCallback] = useMutation(CHECK_OUT_TRX_MUTATION, {
-    update(_, { data }) {
-      if (data.checkOutTrx !== "") message.success(data.checkOutTrx);
-    },
-    onError(err) {
-      CheckError(err);
-    },
-  });
 
   useEffect(() => {
     async function loadingtheModel() {
@@ -126,24 +108,9 @@ export default (props) => {
             const bestMatch = faceMatcher.findBestMatch(desc.descriptor);
             console.log(bestMatch);
             if (bestMatch._label !== "unknown") {
-              const existingTrx = props?.trxList?.find(trx => trx.studentID === bestMatch._label);
-              if (existingTrx && !existingTrx.checkOutTime) {
-                checkOutTrxCallback({
-                  variables: {
-                    attendanceID: props.match.params.attendanceID,
-                    studentID: bestMatch._label,
-                  },
-                });
-                console.log("Checking out");
-              } else if (!existingTrx) {
-                createTrxCallback({
-                  variables: {
-                    attendanceID: props.match.params.attendanceID,
-                    studentID: bestMatch._label,
-                  },
-                });
-                console.log("Checking in");
-              }
+              setIsFaceRecognized(true);
+            } else {
+              setIsFaceRecognized(false);
             }
           });
         }

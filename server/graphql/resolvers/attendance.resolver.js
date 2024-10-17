@@ -17,7 +17,7 @@ module.exports = {
       try {
         const course = await Course.findOne({ shortID: courseID });
         if (!course) {
-          throw new Error("Course do not exist");
+          throw new Error("Department do not exist");
         }
 
         if (
@@ -25,7 +25,7 @@ module.exports = {
           !course.enrolledStudents.find((stud) => stud._id == currUser._id)
         ) {
           throw new Error(
-            "Access forbidden. You are not the course owner or join this course."
+            "Access forbidden. You are not the department owner or join this department."
           );
         }
         let attendanceList;
@@ -59,7 +59,7 @@ module.exports = {
 
         const course = await Course.findOne({ shortID: attendance.course });
         if (!course) {
-          throw new Error("Course do not exist");
+          throw new Error("Department do not exist");
         }
 
         if (
@@ -67,7 +67,7 @@ module.exports = {
           !course.enrolledStudents.find((user) => user._id == currUser._id)
         ) {
           throw new Error(
-            "Access forbidden. You are not the course owner or participants in this course."
+            "Access forbidden. You are not the department owner or participants in this course."
           );
         }
 
@@ -87,14 +87,14 @@ module.exports = {
         const course = await Course.findOne({ shortID: courseID });
 
         if (!course) {
-          throw new Error("Course do not exist");
+          throw new Error("Department do not exist");
         }
         if (
           course.creator != currUser._id &&
           !course.enrolledStudents.find((stud) => stud._id == currUser._id)
         ) {
           throw new Error(
-            "Access forbidden. You are not the course owner or join this course."
+            "Access forbidden. You are not the department owner or join this department."
           );
         }
 
@@ -148,14 +148,14 @@ module.exports = {
 
         const course = await Course.findOne({ shortID: courseID });
         if (!course) {
-          throw new Error("Course does not exist.");
+          throw new Error("Department does not exist.");
         }
 
         await Promise.all(course.enrolledStudents.map(async (studentID) => {
           const sendNotification = new Notification({
             receiver: studentID,
-            title: `New Attendance Notification - Course ID: ${course.shortID}`,
-            content: `Course owner: [${currUser.firstName} ${currUser.lastName}] had created an attendance in the course: ${course.name} (${course.code}-${course.session}).
+            title: `New Attendance Notification - Department ID: ${course.shortID}`,
+            content: `Department owner: [${currUser.firstName} ${currUser.lastName}] had created an attendance in the department: ${course.name} (${course.code}-${course.session}).
             Enter room using URL: ${OfficialURL}/course/${course.shortID}/attendanceRoom/${attendance._id}`,
           });
           await sendNotification.save();
@@ -191,11 +191,11 @@ module.exports = {
 
         const course = await Course.findOne({ shortID: attendance.course });
         if (!course) {
-          throw new Error("Course does not exist");
+          throw new Error("Department does not exist");
         }
 
         if (course.creator != currUser._id) {
-          throw new Error("You are not the course owner");
+          throw new Error("You are not the department owner");
         }
 
         await Attendance.findByIdAndUpdate(attendanceID, {
@@ -222,11 +222,11 @@ module.exports = {
 
         const course = await Course.findOne({ shortID: attendance.course });
         if (!course) {
-          throw new Error("Course does not exist");
+          throw new Error("Department does not exist");
         }
 
         if (course.creator != currUser._id) {
-          throw new Error("You are not the course owner");
+          throw new Error("You are not the department owner");
         }
 
         await Attendance.findByIdAndUpdate(attendanceID, {
