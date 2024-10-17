@@ -64,7 +64,7 @@
         render: (_, record) => `${record.firstName} ${record.lastName}`,
       },
       {
-        title: 'Student ID',
+        title: 'Employee ID',
         dataIndex: 'studentID',
         key: 'studentID',
       },
