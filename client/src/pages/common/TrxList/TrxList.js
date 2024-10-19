@@ -10,7 +10,7 @@
     PageTitleBreadcrumb,
   } from "../../../components/common/sharedLayout";
 
-  const { Title } = Typography;
+  const { Title, Text } = Typography;
   const { Content } = Layout;
 
   const TrxList = () => {
@@ -58,16 +58,6 @@
         key: 'checkOutTime',
         render: (text) => new Date(text).toLocaleString(),
       },
-      {
-        title: 'Full Name',
-        key: 'fullName',
-        render: (_, record) => `${record.firstName} ${record.lastName}`,
-      },
-      {
-        title: 'Employee ID',
-        dataIndex: 'studentID',
-        key: 'studentID',
-      },
     ];
 
     const titleList = [
@@ -93,7 +83,18 @@
             ) : trxList.length === 0 ? (
               <Alert message="No transactions found for this student." type="info" />
             ) : (
-              <Table columns={columns} dataSource={trxList} rowKey="attendanceID" />
+              <>
+                {trxList.length > 0 && (
+                  <div style={{ marginBottom: '20px' }}>
+                    <Text strong>Full Name: </Text>
+                    <Text>{`${trxList[0].firstName} ${trxList[0].lastName}`}</Text>
+                    <br />
+                    <Text strong>Employee ID: </Text>
+                    <Text>{trxList[0].studentID}</Text>
+                  </div>
+                )}
+                <Table columns={columns} dataSource={trxList} rowKey="attendanceID" />
+              </>
             )}
           </Content>
           <Footer />
